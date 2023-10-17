@@ -122,9 +122,8 @@ function PopulateBoard(){
 function PrepareBoard(){
   wordBank=[];
   
-  for(var i = 0, len = wordArr.length; i < len; i++){
+  for(var i = 0, len = wordArr.length; i < len; i++){ 
     wordBank.push(new WordObj(wordArr[i]));
-    wordBank.numbering = i+1;
   }
   
   for(i = 0; i < wordBank.length; i++){
@@ -136,6 +135,10 @@ function PrepareBoard(){
       }
     }
   }  
+  
+  for(var i = 0, len = wordArr.length; i < len; i++){   
+      wordBank[i].numbering = i+1;
+  }
 }
 
 
