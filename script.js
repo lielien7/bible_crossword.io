@@ -28,14 +28,18 @@ var Bounds = {
 //---------------------------------//
 
 function Play(){
-  var letterArr = document.getElementsByClassName('letter');
-  
-  for(var i = 0; i < letterArr.length; i++){
-    letterArr[i].innerHTML = "<input class='char' type='text' maxlength='1'></input>";
-  }
-  
-  mode = 0;
-  ToggleInputBoxes(false);
+    var letterArr = document.getElementsByClassName('letter');
+    
+    for(var i = 0; i < letterArr.length; i++){
+        if (letterArr[i].innerHTML.length > 1) {
+            //number
+        } else {
+            letterArr[i].innerHTML = "<input class='char' type='text' maxlength='1'></input>";
+        }
+    }
+    
+    mode = 0;
+    ToggleInputBoxes(false);
 }
 
 
@@ -82,7 +86,10 @@ function GetWordsFromInput(){
   wordArr = [];  
   for(var i=0,val,w=document.getElementsByClassName("word");i<w.length;i++){
     val = w[i].value.toUpperCase();
-    if (val !== null && val.length > 1){wordArr.push(val);}
+    if (val !== null && val.length > 1){
+
+        wordArr.push(val);
+    }
   }
 }
 
@@ -117,6 +124,7 @@ function PrepareBoard(){
   
   for(var i = 0, len = wordArr.length; i < len; i++){
     wordBank.push(new WordObj(wordArr[i]));
+    wordBank.numbering = i+1;
   }
   
   for(i = 0; i < wordBank.length; i++){
@@ -269,11 +277,19 @@ function AddWordToBoard(){
     
     if (matchData.dir === 0){
       xIndex += i;    
-      board[xIndex][yIndex] = wordsActive[pushIndex].char[i];
+      if (i == 0) {
+        board[xIndex][yIndex] = wordsActive[pushIndex].numbering+wordsActive[pushIndex].char[i];        
+      } else {
+        board[xIndex][yIndex] = wordsActive[pushIndex].char[i];
+      }
     }
     else{
-      yIndex += i;  
-      board[xIndex][yIndex] = wordsActive[pushIndex].char[i];
+        yIndex += i; 
+        if (i == 0) {
+            board[xIndex][yIndex] = wordsActive[pushIndex].numbering+wordsActive[pushIndex].char[i];        
+        } else { 
+            board[xIndex][yIndex] = wordsActive[pushIndex].char[i];
+        }
     }
     
     Bounds.Update(xIndex,yIndex);
@@ -312,6 +328,7 @@ function WordObj(stringValue){
   this.totalMatches = 0;
   this.effectiveMatches = 0;
   this.successfulMatches = [];  
+  this.numbering = 1;
 }
 
 
