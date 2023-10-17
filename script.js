@@ -66,17 +66,20 @@ function Create(){
 function ToggleInputBoxes(active){
   var w=document.getElementsByClassName('word'),
       d=document.getElementsByClassName('clue');
+      n=document.getElementsByClassName('number')
   
   for(var i=0;i<w.length; i++){
     if(active===true){
       RemoveClass(w[i], 'hide');
       RemoveClass(d[i], 'clueReadOnly');
       d[i].disabled = '';
+      n[i].disabled = ''
     }
     else{
       AddClass(w[i], 'hide');
       AddClass(d[i], 'clueReadOnly');
       d[i].disabled = 'readonly';
+      n[i].disabled = 'readonly'
     }
   }
 }
