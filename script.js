@@ -31,7 +31,7 @@ function Play(){
     var letterArr = document.getElementsByClassName('letter');
     
     for(var i = 0; i < letterArr.length; i++){
-        if (isNumber(letterArr[i].innerHTML)) {
+        if (letterArr[i].innerHTML.length > 1) {
             //number
         } else {
             letterArr[i].innerHTML = "<input class='char' type='text' maxlength='1'></input>";
@@ -284,8 +284,7 @@ function AddWordToBoard(){
     if (matchData.dir === 0){
       xIndex += i;    
       if (i == 0) {
-        board[xIndex-1][yIndex] = wordsActive[pushIndex].numbering;
-        board[xIndex][yIndex] =wordsActive[pushIndex].char[i];        
+        board[xIndex][yIndex] = wordsActive[pushIndex].numbering+wordsActive[pushIndex].char[i];        
       } else {
         board[xIndex][yIndex] = wordsActive[pushIndex].char[i];
       }
@@ -293,8 +292,7 @@ function AddWordToBoard(){
     else{
         yIndex += i; 
         if (i == 0) {
-            board[xIndex][yIndex-1] = wordsActive[pushIndex].numbering;
-            board[xIndex][yIndex-1] = wordsActive[pushIndex].char[i];        
+            board[xIndex][yIndex] = wordsActive[pushIndex].numbering+wordsActive[pushIndex].char[i];        
         } else { 
             board[xIndex][yIndex] = wordsActive[pushIndex].char[i];
         }
